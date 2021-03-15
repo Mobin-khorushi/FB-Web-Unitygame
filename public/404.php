@@ -1,0 +1,41 @@
+<?php
+    session_start();
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Not Found</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.html" type="image/x-icon">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Plugin css -->
+    <link rel="stylesheet" href="assets/css/plugin.css">
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="assets/css/404.css">
+    <!-- responsive -->
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+</head>
+
+<body>
+    <div class="container" id="containerM">
+        <div class="container" id="titleMsg">
+        <h2>404</h2>
+        <br/>
+        <h1>Page Not Found</h1>
+        </div>
+        <br/><br/><br/>
+        <div class="container" id="mainMsg">
+        <p>The specified file was not found on this website. Please check the URL for mistakes and try again.</p>
+        
+        <a href="./">Click here to return to main page!</a>
+        </div>          
+    </div>
+</body>
+
+</html>
