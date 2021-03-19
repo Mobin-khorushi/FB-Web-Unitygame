@@ -42,8 +42,6 @@ function loginValid(userInfo) {
     var passErr = { error: '' };
     if (userInfo.email == null)
         return "Email/Password is incorrect can't log you in!";
-    if (!validateEmail(userInfo.email))
-        return "Email/Password is incorrect can't log you in!";
     if (!validPassword(userInfo.password, passErr)) {
         return "Email/Password is incorrect can't log you in!";
     }

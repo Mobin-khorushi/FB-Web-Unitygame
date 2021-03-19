@@ -61,7 +61,7 @@
                             <div class="right-content">
                                 <ul class="right-list">
                                     <li>
-                                        <?php if(!isset($_SESSION['username'])) : ?>
+                                        <?php if (!isset($_SESSION['username'])) : ?>
                                         <a href="#" class="sign-in" data-toggle="modal" data-target="#login">
                                             <i class="fas fa-user"></i> Sign In
                                         </a>
@@ -127,7 +127,7 @@
 										</a>
                                     </li>
                                 </ul>
-                                <?php if(!isset($_SESSION['username'])) : ?>
+                                <?php if (!isset($_SESSION['username'])) : ?>
                                     <a href="" class="mybtn1" data-toggle="modal" data-target="#signin"> Join</a>
                                 <?php else :?>
                                     <a href="" class="mybtn1"> Profile</a>
@@ -947,7 +947,7 @@
                         <form id="login-form" name="login-form" action="javascript:void(0);" method="POST">
                             <div class="form-group">
                                 <label for="login-input-email">Email</label>
-                                <input type="email" class="input-field" id="login-input-email" placeholder="Enter your Email" name="email">
+                                <input type="text" class="input-field" id="login-input-email" placeholder="Enter your Email" name="email">
                             </div>
                             <div class="form-group">
                                 <label for="login-input-password">Password</label>
@@ -1046,7 +1046,7 @@
     <script src="assets/js/mousemoveparallax.js "></script>
     <!-- main -->
     <script src="assets/js/main.js "></script>
-    <script src="assets/js/signup.js"></script>
+    <script src="assets/js/signup.js?v=1.2"></script>
 </body>
 
 
