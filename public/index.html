@@ -1,6 +1,3 @@
-<?php
-    session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +29,7 @@
     <link rel="stylesheet" href="assets/css/plugin.css">
 
     <!-- stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css?v=1.6">
+    <link rel="stylesheet" href="assets/css/style.css?v=1.3">
     <!-- responsive -->
     <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
@@ -60,28 +57,8 @@
                             </div>
                             <div class="right-content">
                                 <ul class="right-list">
-                                    <li>
-                                        <?php if (!isset($_SESSION['username'])) : ?>
-                                        <a href="#" class="sign-in" data-toggle="modal" data-target="#login">
-                                            <i class="fas fa-user"></i> Sign In
-                                        </a>
-                                        <?php else :?>
-                                        <a href="#" class="sign-in" data-toggle="modal" data-target="#userInfo">
-                                            
-                                        </a>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-user"></i> <?php echo $_SESSION['username'];?>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Profile</a>
-                                                <a class="dropdown-item" href="#">Settings</a>
-                                                <a class="dropdown-item" href="#">Support</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" id="sign-out-a" href="#">Sign out!</a>
-                                            </div>
-                                        </div>
-                                        <?php endif;?>
+                                    <li id="displayBtnRightUp">
+                                        
                                     </li>
                                 </ul>
                             </div>
@@ -127,11 +104,7 @@
 										</a>
                                     </li>
                                 </ul>
-                                <?php if (!isset($_SESSION['username'])) : ?>
-                                    <a href="" class="mybtn1" data-toggle="modal" data-target="#signin"> Join</a>
-                                <?php else :?>
-                                    <a href="" class="mybtn1"> Profile</a>
-                                <?php endif;?>
+                                
                             </div>
                         </nav>
                         
@@ -1033,7 +1006,7 @@
     <!-- SignIn Area End -->
 
     <!-- jquery -->
-    <script src=" assets/js/jquery.js "></script>
+    <script src=" assets/js/jquery.js"></script>
     <!-- popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- bootstrap -->
@@ -1044,10 +1017,43 @@
     <!-- MpusemoverParallax JS-->
     <script src="assets/js/TweenMax.js "></script>
     <script src="assets/js/mousemoveparallax.js "></script>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyDmPUGsAzTaOpFqOz5R3Y0ssGpRxVnOV58",
+        authDomain: "pgames-4dad9.firebaseapp.com",
+        databaseURL: "https://pgames-4dad9.firebaseio.com",
+        projectId: "pgames-4dad9",
+        storageBucket: "pgames-4dad9.appspot.com",
+        messagingSenderId: "962144324924",
+        appId: "1:962144324924:web:3a2f1986bb52a320e4a239",
+        measurementId: "G-EWKFZE933P"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    db.settings({timestampsInSnapshots: true});
+    </script>
     <!-- main -->
-    <script src="assets/js/main.js "></script>
-    <script src="assets/js/signup.js?v=1.2"></script>
+    <script src="assets/js/main.js"></script>
+    <!-- user -->
+    <script src="assets/js/signup.js"></script>
 </body>
+
 
 
 <!-- Mirrored from pixner.net/2pgames/2pgames/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Sep 2020 16:25:37 GMT -->

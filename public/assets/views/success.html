@@ -1,13 +1,3 @@
-<?php 
-
-session_start();
-
-if(!isset($_POST['title'])){
-    header('Location: ../../404.php');
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -32,16 +22,16 @@ if(!isset($_POST['title'])){
 <body>
     <div class="container" id="containerM">
         <div class="container" id="titleMsg">
-        <h2>Failed!</h2>
-        <br/>
-        <h1><?php echo $_POST['title']?></h1>
+            <h2>Success!</h2>
+            <br/>
+            <!--<h1><?php echo $_POST['title']?></h1> -->
         </div>
         <br/><br/><br/>
         <div class="container" id="mainMsg">
-        <p><?php echo $_POST['message']?></p>
-        
-        <a href="../../">Click here to return to main page!</a>
-        </div>          
+            <!--<p><?php echo $_POST['message']?></p> -->
+
+            <a href="../../">Click here to return to main page!</a>
+        </div>
     </div>
 </body>
 

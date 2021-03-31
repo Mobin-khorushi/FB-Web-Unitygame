@@ -1,3 +1,49 @@
+const signUpAndUserBtn = $('#displayBtnRightUp');
+
+auth.onAuthStateChanged(user => {
+    console.log(user);
+    let html = '';
+    if (!user) {
+        html = `
+            <a href="#" class="sign-in" data-toggle="modal" data-target="#login">
+            <i class="fas fa-user"></i> Sign In
+            </a>
+        `;
+
+        $('#displayBtnRightUp').append(html);
+        html = `<a href="" class="mybtn1" data-toggle="modal" data-target="#signin"> Join</a>`;
+        $('#main_menu').append(html);
+    } else {
+        html = `
+        <a href="#" class="sign-in" data-toggle="modal" data-target="#userInfo">
+                                            
+        </a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> ` + user.displayName + `
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" href="#">Support</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" id="sign-out-a" href="#">Sign out!</a>
+            </div>
+        </div>
+        `;
+        $('#displayBtnRightUp').append(html);
+        html = `<a href="" class="mybtn1"> Profile</a>`;
+        $('#main_menu').append(html);
+        $("#sign-out-a").click(function(event) {
+            event.preventDefault();
+            console.log("sign");
+            auth.signOut().then(() => {
+                $.redirect('./assets/views/success.html', { 'title': "Signed out!", 'message': 'Cya! hope to see you again!', 'logout': 'true' });
+            });
+        })
+    }
+});
+
 function convertArrayToObject(array, key) {
     const initialValue = {};
     return array.reduce((obj, item) => {
@@ -20,17 +66,15 @@ function validateEmail(email) {
 }
 
 function validPassword(password, error) {
-    if (!password.match(/[a-z]+/)) {
-        error.error = 'Please use atleast one lowercase letter in password';
+    if (password.length < 6) {
+        error.error = 'Please make your password at least 6 characters';
         return false;
-    } else if (!password.match(/[A-Z]+/)) {
-        error.error = 'Please use atleast one highercase letter in password';
+    }
+    if (!password.match(/[a-z]+/) && !password.match(/[A-Z]+/)) {
+        error.error = 'Please use atleast one letter in password';
         return false;
     } else if (!password.match(/[0-9]+/)) {
         error.error = 'Please use atleast one number in password';
-        return false;
-    } else if (!password.match(/[$@#&!]+/)) {
-        error.error = 'Please use atleast one character in password';
         return false;
     } else {
         return true;
@@ -107,6 +151,7 @@ function sendUserRegister(userInfo) {
             submit: true
         },
         success: function(response) {
+            console.log(response);
             var resObj = JSON.parse(response);
 
             if (resObj['success'] == false) {
@@ -134,7 +179,19 @@ $("#signup-form").submit(function(event) {
         check: agreeCheckSignUp(formObj)
     };
     if (signUpValid(userInfo) == "") {
-        sendUserRegister(userInfo);
+        //sendUserRegister(userInfo);
+        auth.createUserWithEmailAndPassword(userInfo.email, userInfo.password).then(res => {
+            auth.currentUser.updateProfile({
+                displayName: userInfo.username
+            }).then(res => {
+                $.redirect('./assets/views/success.html', { 'title': "Signed up!", 'message': 'Thanks for joining to our team!' });
+            }, err => {
+                alert(err.message);
+            })
+
+        }).catch(err => {
+            alert(err.message);
+        });
     } else {
         alert(signUpValid(userInfo));
     }
@@ -148,13 +205,12 @@ $("#login-form").submit(function(event) {
         password: formObj.password.value
     };
     if (loginValid(userInfo) == "") {
-        sendUserLogin(userInfo);
+        auth.signInWithEmailAndPassword(userInfo.email, userInfo.password).then(res => {
+            $.redirect('./assets/views/success.html', { 'title': "Signed in!", 'message': 'Welcome back! glad to have you here!' });
+        }).catch(err => {
+            alert(err.message);
+        });
     } else {
         alert(loginValid(userInfo));
     }
 });
-$("#sign-out-a").click(function(event) {
-    event.preventDefault();
-    console.log("sign");
-    $.redirect('./assets/views/success.php', { 'title': "Signed out!", 'message': 'Cya! hope to see you again!', 'logout': 'true' });
-})
