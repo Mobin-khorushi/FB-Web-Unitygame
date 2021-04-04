@@ -14,9 +14,9 @@ function userExists($conn, $user, $email)
         'result' => null,
 
     ];
-    $sql = "SELECT * FROM userinfo WHERE username = ? or email = ?;";
     $snapshot = $conn->getReference("Users")->getSnapshot();
-
+    $keyArry = $conn->getReference("Users")->getChildKeys();
+    
     if ($snapshot->hasChild($user) !== false) {
         $resultObj->error = 'Found-User';
         $resultObj->success = false;
@@ -24,6 +24,25 @@ function userExists($conn, $user, $email)
 
         return $resultObj;
     } else {
+        
+        $foundUser = null;
+
+        foreach ($keyArry as $arr) {
+            $emmAdd = $snapshot->getChild($arr)->getChild('email')->getValue();
+            if(strcasecmp($emmAdd, $user) == 0)
+            {
+                $foundUser = $arr;
+                break;
+            }
+        }
+        if($foundUser !== null)
+        {
+            $resultObj->error = 'Found-User';
+            $resultObj->success = false;
+            $resultObj->result = $snapshot->getChild($foundUser)->getValue();
+
+            return $resultObj;
+        }
         $resultObj->error = 'Not-Found';
         $resultObj->success = true;
         $resultObj->result = null;
@@ -44,7 +63,7 @@ function createUser($conn, $user, $email, $password)
 
 
     $res = $conn->getReference("Users")
-        ->set([$user => [
+        ->update([$user => [
         'name' => $user,
         'email' => $email,
         'password' => $hashPass

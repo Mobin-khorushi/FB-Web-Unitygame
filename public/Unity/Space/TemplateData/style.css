@@ -5,8 +5,11 @@
 }
 
 .webgl-content {
-    top: 0;
-    left: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .webgl-content .logo,
@@ -91,47 +94,6 @@
     float: right;
 }
 
-body,
-html {
-    margin: 0;
-    padding: 0;
-}
-
-#gameContainer canvas {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-}
-
-.simmer {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    color: #aaa;
-    font-size: 9px;
-    font-family: sans-serif;
-    font-family: sans-serif;
-    /*want to remove the simmer branding? uncomment display:none below!*/
-    /*display:none;*/
-}
-
-.simmer a {
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 12px;
-    transition: opacity 3s;
-}
-
-.simmer a:hover {
-    color: #fff;
-    text-decoration: underline;
-}
-
-.simmer.hide {
-    opacity: 0;
-}
-
 
 /* The side navigation menu */
 
@@ -197,4 +159,71 @@ html {
     .sidenav a {
         font-size: 18px;
     }
+}
+
+#LetsTest {
+    position: absolute;
+    left: 0px;
+    top: 20%;
+    max-width: 1000px;
+    margin-right: 0px
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.chat {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body {
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body {
+    margin-right: 60px;
+}
+
+.chat li .chat-body p {
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon,
+.chat .glyphicon {
+    margin-right: 5px;
+}
+
+.panel-body {
+    overflow-y: scroll;
+    height: 250px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
 }
