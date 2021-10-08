@@ -4,6 +4,7 @@ const { response } = require("express");
 
 const app = express();
 
+
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/views'));
 app.get('/home', (req, res) => {
@@ -19,9 +20,10 @@ app.get('/game/space', (req, res) => {
     res.render('Unity/Space/index');
 });
 app.get('/game/rock', (req, res) => {
-    res.render('Unity/Rcok/index');
+    res.render('Unity/Rock/index');
 });
 app.get('/game/race', (req, res) => {
     res.render('Unity/Race/index');
 });
+
 exports.app = functions.https.onRequest(app);
